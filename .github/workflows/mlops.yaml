@@ -38,7 +38,7 @@ jobs:
         run: python src/train.py --run_name "CICD_Automated_Run"
 
       - name: 6. Metrics Generation (Save JSON)
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: metrics-json
           path: metrics.json
