@@ -2,9 +2,8 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
-# Copy requirements and install them
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir pandas scikit-learn mlflow boto3 fastapi uvicorn
+RUN pip install --no-cache-dir dvc[s3]
 
 # Copy the source code
 COPY src/ /app/src/
