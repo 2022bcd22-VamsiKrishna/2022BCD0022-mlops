@@ -7,6 +7,8 @@ import os
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
 from sklearn.metrics import mean_squared_error, r2_score
+import json
+
 
 def main(args):
     mlflow.set_tracking_uri("http://localhost:5000") 
@@ -51,6 +53,17 @@ def main(args):
         mlflow.log_metric("dataset_size", dataset_size)
         mlflow.log_metric("rmse", rmse)
         mlflow.log_metric("r2_score", r2)
+
+        metrics_dict = {
+            "Name": "Vamsi Krishna Vutla",
+            "Roll_Number": "2022BCD0022",
+            "Dataset_Size": dataset_size,
+            "Model": args.model_type,
+            "RMSE": round(rmse, 4),
+            "R2_Score": round(r2, 4)
+        }
+        with open("metrics.json", "w") as f:
+            json.dump(metrics_dict, f, indent=4)
 
         # Log Model
         mlflow.sklearn.log_model(model, "model")
